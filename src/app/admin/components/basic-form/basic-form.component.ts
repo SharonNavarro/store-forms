@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 })
 export class BasicFormComponent implements OnInit {
 
+  // INPUTS
   nameField = new FormControl('');
   emailField = new FormControl('');
   phoneField = new FormControl('');
@@ -21,8 +22,14 @@ export class BasicFormComponent implements OnInit {
   searchField = new FormControl('');
   descriptionField = new FormControl('');
 
+  // SELECTS
   categoryField = new FormControl('category-2');
   tagField = new FormControl()
+
+  // INPUT RADIO AND CHECKBOX
+  agreeField = new FormControl(false);
+  genderField = new FormControl('');
+  zoneField = new FormControl('');
 
   constructor() { }
 

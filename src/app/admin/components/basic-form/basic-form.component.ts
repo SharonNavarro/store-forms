@@ -35,15 +35,11 @@ export class BasicFormComponent implements OnInit {
   }
 
   get isNameFieldValid() {
-    {
       return this.nameField.touched && this.nameField.valid;
-    }
   }
 
   get isNameFieldInvalid() {
-    {
       return this.nameField.touched && this.nameField.invalid;
-    }
   }
 
   get emailField() {

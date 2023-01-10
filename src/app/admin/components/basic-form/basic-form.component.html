@@ -9,13 +9,9 @@
   </code>
   </p>
 
-  <div class="messages" [class.active]="isNameFieldInvalid">
+  <div class="messages" [class.active]="phoneField.touched && phoneField.invalid">
     <p>
-      <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
-    </p>
-
-    <p>
-      <strong *ngIf="nameField.touched && nameField.hasError('maxlength')">Debe tener máximo 10</strong>
+      <strong *ngIf="phoneField.touched && phoneField.hasError('required')">Este campo es requerido</strong>
     </p>
   </div>
 

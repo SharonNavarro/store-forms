@@ -1,12 +1,17 @@
 <p>
   Name: {{nameField.value}} {{nameField.valid}}
-  <input type="text" [formControl]="nameField" />
+  <input
+  [class.is-valid]="isNameFieldValid"
+  [class.is-invalid]="isNameFieldInvalid"
+  type="text"
+  [formControl]="nameField" />
   <button [disabled]="nameField.invalid" (click)="getNameValue()">Get value</button>
   <code>
   <pre>{{nameField | json }}</pre>
   </code>
 </p>
 
+<div class="messages" [class.active]="isNameFieldInvalid">
 <p>
   <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
 </p>
@@ -14,6 +19,8 @@
 <p>
   <strong *ngIf="nameField.touched && nameField.hasError('maxlength')">Debe tener máximo 10</strong>
 </p>
+</div>
+
 
 <p>
   Email: {{ emailField.value }}
@@ -130,4 +137,3 @@
     Zone 3
   </label>
 </p>
-

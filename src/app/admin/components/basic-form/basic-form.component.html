@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="save()">
+<form [formGroup]="form" (ngSubmit)="save($event)">
   <p>
     Name: {{nameField.value}} {{nameField.valid}}
     <input [class.is-valid]="isNameFieldValid" [class.is-invalid]="isNameFieldInvalid" type="text"
@@ -9,9 +9,17 @@
   </code>
   </p>
 
-  <div class="messages" [class.active]="phoneField.touched && phoneField.invalid">
+  <div class="messages" [class.active]="isNameFieldInvalid">
     <p>
-      <strong *ngIf="phoneField.touched && phoneField.hasError('required')">Este campo es requerido</strong>
+      <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+    </p>
+
+    <p>
+      <strong *ngIf="nameField.touched && nameField.hasError('maxlength')">Debe tener máximo 10</strong>
+    </p>
+
+    <p>
+      <strong *ngIf="nameField.touched && nameField.hasError('pattern')">No debe tener caracteres...</strong>
     </p>
   </div>
 
@@ -21,10 +29,26 @@
     <input type="email" formControlName="email" />
   </p>
 
+  <div class="messages" [class.active]="emailField.touched && emailField.invalid">
+    <p>
+      <strong *ngIf="emailField.hasError('required')">Este campo es requerido</strong>
+    </p>
+
+    <p>
+      <strong *ngIf="emailField.hasError('email')">Esto no es un email válido</strong>
+    </p>
+  </div>
+
   <p>
     Phone: {{ phoneField.value }}
     <input type="tel" formControlName="phone" />
   </p>
+
+  <div class="messages" [class.active]="phoneField.touched && phoneField.invalid">
+    <p>
+      <strong *ngIf="phoneField.touched && phoneField.hasError('required')">Este campo es requerido</strong>
+    </p>
+  </div>
 
   <p>
     Color: {{ colorField.value }}
@@ -45,6 +69,20 @@
     Age: {{ ageField.value }}
     <input type="number" formControlName="age" />
   </p>
+
+  <div class="messages" [class.active]="ageField.touched && ageField.invalid">
+    <p>
+      <strong *ngIf="ageField.hasError('required')">Este campo es requerido</strong>
+    </p>
+
+    <p>
+      <strong *ngIf="ageField.hasError('min')">Debe der mayor de edad</strong>
+    </p>
+
+    <p>
+      <strong *ngIf="ageField.hasError('max')">Debe der menor de 100 años</strong>
+    </p>
+  </div>
 
   <p>
     Password: {{ passwordField.value }}

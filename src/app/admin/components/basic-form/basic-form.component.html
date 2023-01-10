@@ -1,4 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="save($event)">
+<div formGroupName="fullname">
   <p>
     Name: {{nameField.value}} {{nameField.valid}}
     <input [class.is-valid]="isNameFieldValid" [class.is-invalid]="isNameFieldInvalid" type="text"
@@ -22,6 +23,14 @@
       <strong *ngIf="nameField.touched && nameField.hasError('pattern')">No debe tener caracteres...</strong>
     </p>
   </div>
+
+  <p>
+    Last Name: {{lastField.value}} {{lastField.valid}}
+    <input type="text"
+      formControlName="last" />
+  </p>
+</div>
+
 
 
   <p>

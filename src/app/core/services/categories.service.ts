@@ -1,0 +1,30 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
+import { Category } from "../models/category.model";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CategoriesService {
+
+  constructor(
+    private http: HttpClient
+  ){}
+
+
+  getAllCategories() {
+    return this.http.get<Category[]>(`${environment.url_api}/categories/`)
+  }
+
+  createCategory(data: Partial<Category>) {
+    return this.http.post<Category>(`${environment.url_api}/categories/`, data)
+  }
+
+  updateCategory(data: Partial<Category>, id:string) {
+    return this.http.post<Category>(`${environment.url_api}/categories/${id}`, data)
+  }
+
+
+}

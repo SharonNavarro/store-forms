@@ -22,6 +22,7 @@
       </div>
       <div class="row">
         <div class="col-xs">
+                    <!-- <img *ngIf="(image$ | async) as image" [src]="image"/> -->
           <img *ngIf="imageField.value" [src]="imageField.value"/>
             <input (change)="uploadFile($event)" placeholder="Image" type="text">
             <div class="messages" *ngIf="imageField.touched && imageField.invalid">
@@ -33,7 +34,10 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button type="submit">Guardar categoría</button>
+      <button mat-raised-button type="submit">
+        <span *ngIf="!categoryId">Crear categoría</span>
+        <span *ngIf="categoryId">Editar categoría</span>
+      </button>
     </mat-card-actions>
   </mat-card>
 </form>

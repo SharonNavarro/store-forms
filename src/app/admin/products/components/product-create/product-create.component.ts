@@ -7,8 +7,10 @@ import { finalize } from 'rxjs/operators';
 
 import { MyValidators } from './../../../../utils/validators';
 import { ProductsService } from './../../../../core/services/products/products.service';
+import { Category } from './../../../../core/models/category.model';
 
 import { Observable } from 'rxjs';
+import { CategoriesService } from 'src/app/core/services/categories.service';
 
 @Component({
   selector: 'app-product-create',
@@ -19,23 +21,28 @@ export class ProductCreateComponent implements OnInit {
 
   form: UntypedFormGroup;
   image$: Observable<any>;
+  categories: Category[] = [];
 
   constructor(
     private formBuilder: UntypedFormBuilder,
     private productsService: ProductsService,
     private router: Router,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private categoriesService: CategoriesService
+
   ) {
     this.buildForm();
   }
 
   ngOnInit() {
+    this.getCategories();
   }
 
   saveProduct(event: Event) {
     event.preventDefault();
     if (this.form.valid) {
       const product = this.form.value;
+      console.log(product);
       this.productsService.createProduct(product)
       .subscribe((newProduct) => {
         console.log(newProduct);
@@ -79,6 +86,12 @@ export class ProductCreateComponent implements OnInit {
 
   get nameField() {
     return this.form.get('name');
+  }
+
+  getCategories() {
+    this.categoriesService.getAllCategories().subscribe((data) => {
+      this.categories = data;
+    })
   }
 
 }

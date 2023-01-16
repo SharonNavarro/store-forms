@@ -17,8 +17,15 @@ export class CategoryFormComponent implements OnInit {
 
   form: FormGroup;
   image$: Observable<string>;
+  isNew = true;
 
-  @Input() category: Category;
+  @Input()
+  set category(data: Category) {
+    if (data) {
+      this.isNew = false;
+      this.form.patchValue(data);
+    }
+  }
   @Input() create = new EventEmitter();
   @Input() update = new EventEmitter();
 
@@ -52,10 +59,10 @@ export class CategoryFormComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
-      if(this.category){
-        this.update.emit(this.form.value);
-      } else {
+      if (this.isNew) {
         this.create.emit(this.form.value);
+      } else {
+        this.update.emit(this.form.value);
       }
     } else {
       this.form.markAllAsTouched();

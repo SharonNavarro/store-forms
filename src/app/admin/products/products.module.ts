@@ -8,7 +8,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -19,6 +19,7 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
   ],
   imports: [
     CommonModule,
+    SharedModule,
     ReactiveFormsModule,
     MaterialModule,
     ProductsRoutingModule

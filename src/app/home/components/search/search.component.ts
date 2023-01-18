@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map } from 'rxjs';
+import { debounceTime, map } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -19,10 +19,10 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchField.valueChanges
+    .pipe(debounceTime(300))
     .subscribe((data) => {
       this.getData(data);
       }
-
     )
   }
 
